@@ -1,0 +1,17 @@
+---
+- hosts: webserver
+  become: true
+  become_user: root
+  tasks:
+    - name: "cloning the git repository"
+      git:
+        repo: https://github.com/Archana-209/MiniProject-Jenkins.git
+        dest: /etc/ansible/project8
+        clone: yes
+        update: yes
+
+    - name: "Copy JAR file to remote server"
+      copy:
+        src: /etc/ansible/project8/web-application-0.6.1.jar
+        dest: /home/ubuntu/Project
+        remote_src: yes
